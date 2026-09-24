@@ -1,5 +1,8 @@
 module Optimizer
 
+using LinearAlgebra
+
+
 # Write your package code here.
 include("./bisect.jl")
 include("./brentq.jl")

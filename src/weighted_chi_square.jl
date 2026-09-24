@@ -2,13 +2,13 @@
 
 function χsq(yth::AbstractVector{Float64}, yexp::AbstractVector{Float64}, inv_σ::AbstractVector{Float64})
     dy = @. (yth - yexp) * inv_σ # broadcast
-    chi2 = sum(x -> x^2, dy)
+    chi2 = dot(dy, dy)
     return chi2
 end
 
 function χsq(yth::AbstractVector{Float64}, yexp::AbstractVector{Float64}, inv_σ::AbstractMatrix{Float64})
     dy = yth - yexp 
-    chi2 = dy' * inv_σ * dy # broadcast
+    chi2 = dot(dy, inv_σ * dy) # broadcast
     return chi2
 end
 
