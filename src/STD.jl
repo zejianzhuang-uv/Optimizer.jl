@@ -39,11 +39,10 @@ end
 
 
 
-function STD(sample::AbstractArray; kwargs...)
-    err = std(sample; kwargs...)
-    if ndims(sample) == 3
-        err = err |> x -> dropdims(x, dims=3)
-    end
+function STD(sample::AbstractArray; dims, kwargs...)
+    err = dropdims(std(sample; dims, kwargs...); dims)
+    ndims(err) in (1, 2) ||
+        throw(ArgumentError("loess_smooth needs a vector or matrix, got $(ndims(err))D"))
     return loess_smooth(err)
 end
 
