@@ -17,4 +17,8 @@ include("weighted_chi_square.jl")
 export bisectv, brentqv, gaussian_quad, derivative, STD, df_STD
 # chi2
 export χsq, weightedχsq, red_weightedχsq, loess_smooth
+
+export hyperα, hyperχsq, whyperχsq
+
+
 end

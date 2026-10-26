@@ -32,3 +32,27 @@ function red_weightedχsq(all_weight_chi2::Float64, Ntot::Int64, nfit::Int64, Ns
     chi2 = (Ntot / (Ntot - nfit)) * (1/Nsp) * all_weight_chi2
     return chi2
 end
+
+
+"""
+Hobson–Bridle–Lahav χ²: −2 ln L after marginalising the dataset weight α with prior e^(−α)
+- χ2: raw χ² of the dataset (not divided by n)
+- n: number of data points
+"""
+function hyperχsq(χ2::Float64, n::Int64)
+    return (n + 2) * log(χ2 + 2)
+end
+
+"""
+Scheme B: hyperχsq divided by n, same normalisation as weightedχsq
+"""
+function whyperχsq(χ2::Float64, n::Int64)
+    return hyperχsq(χ2, n) / n
+end
+
+"""
+Effective weight of the dataset, α = (n + 2) / (χ² + 2)
+"""
+function hyperα(χ2::Float64, n::Int64)
+    return (n + 2) / (χ2 + 2)
+end
